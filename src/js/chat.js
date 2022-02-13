@@ -8,14 +8,22 @@ const chatinput = document.querySelector(".chatting-input")
 const sendbutton = document.querySelector(".send-button")
 const chattingscreen = document.querySelector(".display-container")
 
-sendbutton.addEventListener("click",()=>{
+function send () {
     const param = {
         name: nickname.value,
         msg : chatinput.value
     }
     Socket.emit("chatting",param)
-    
-    })
+}
+
+chatinput.addEventListener("keypress", (e)=>{
+    if(e.keyCode === 13){
+        send()
+        chatinput.value = "";
+    }
+})
+
+sendbutton.addEventListener("click",send)
 
 
 
